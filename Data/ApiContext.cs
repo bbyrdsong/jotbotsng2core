@@ -2,9 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using JotBotNg2Core.Models;
 using JotBotNg2Core.Lib;
 using System.Linq;
-using Microsoft.Extensions.Configuration;
 using System;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace JotBotNg2Core.Data
 {
