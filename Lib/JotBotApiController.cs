@@ -1,7 +1,6 @@
 using JotBotNg2Core.Data;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace JotBotNg2Core.Lib
 {
