@@ -59,6 +59,10 @@ namespace JotBotNg2Core
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
 
+                routes.MapRoute(
+                    name: "defaultApi",
+                    template: "api/{controller=root}/{id?}");
+
                 routes.MapSpaFallbackRoute(
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });

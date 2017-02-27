@@ -1,6 +1,7 @@
 using JotBotNg2Core.Data;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace JotBotNg2Core.Lib
 {
@@ -23,33 +24,57 @@ namespace JotBotNg2Core.Lib
 
 #region Public - api
         [HttpGet("{id}")]
-        public T Get(int id) 
+        public IActionResult Get(int id) 
         {
-            return GetModel(id);
+            var result = GetModel(id) as IonResource;
+            result.Meta = new IonLink { Href = Url.Link("defaultApi", new { id = id }), Relations = new[] { "GET" }};
+
+            return Ok(result);
         }
 
         [HttpGet]
-        public IEnumerable<T> Get()
+        public IActionResult Get()
         {
-            return GetModels();
+            var results = GetModels();
+            foreach (var obj in results)
+            {
+                (obj as IonResource).Meta = new IonLink { Href = Url.Link("defaultApi", new { id = obj.Id }), Relations = new[] { "GET" }};
+            }
+            var response = new IonCollection<T>()
+            {
+                Meta = new IonLink { Href = Url.Link("defaultApi", null), Relations = new[] { "GET", "collection"}},
+                Items = results
+            };
+
+            return Ok(response);
         }
 
         [HttpPost]
-        public T Post(T model)
+        public IActionResult Post(T model)
         {
-            return PostModel(model);
+            var result = PostModel(model);
+            var forMeta = result as IonResource;
+
+            forMeta.Meta = new IonLink { Href = Url.Link("defaultApi", new { id = result.Id }), Relations = new[]{"POST"}};
+
+            return Ok(forMeta);
         }
 
         [HttpPut]
-        public T Put(T model)
+        public IActionResult Put(T model)
         {
-            return PutModel(model);
+            var result = PutModel(model) as IonResource;
+            result.Meta = new IonLink { Href = Url.Link("defaultApi", new { id = model.Id }), Relations = new[] {"PUT"}};
+
+            return Ok(result);
         }
 
         [HttpDelete]
-        public void Delete(T model)
+        public IActionResult Delete(T model)
         {
             DeleteModel(model);
+
+            return Ok();
         }
 #endregion
 

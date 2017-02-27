@@ -2,7 +2,7 @@ using System;
 
 namespace JotBotNg2Core.Lib 
 {
-    public class JotBot: ISupportIdentity, IAuditable
+    public class JotBot: IonResource, ISupportIdentity, IAuditable
     {
         public int Id { get; set; }
         public string Name { get; set; }
