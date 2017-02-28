@@ -70,7 +70,7 @@ namespace JotBotNg2Core.Data
                 var delQn = context.Find<QuickNote>(2);
                 var delQnId = delQn.Id;
                 Log($"Preparing to delete quicknote id: {delQn.Id}");
-                context.Delete(delQn);
+                context.Delete<QuickNote>(delQnId);
                 context.SaveChanges();
                 var quickNoteExist = context.GetAll<QuickNote>().Any(o => o.Id == delQnId);
                 Log($"quick note id {delQnId} exists? {quickNoteExist}");

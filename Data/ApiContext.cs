@@ -3,6 +3,7 @@ using JotBotNg2Core.Models;
 using JotBotNg2Core.Lib;
 using System.Linq;
 using System;
+using System.Reflection;
 
 namespace JotBotNg2Core.Data
 {
@@ -28,13 +29,14 @@ namespace JotBotNg2Core.Data
 #region IDataContext implementation
         public T Insert<T>(T entity) where T: class, ISupportIdentity
         {
-            var audit = ApplyAuditTrail(entity);
-            return base.Set<T>().Add(audit).Entity;
+            ApplyAuditTrail(ref entity);
+            return base.Set<T>().Add(entity).Entity;
         }
 
-        public void Delete<T>(T entity) where T: class, ISupportIdentity
+        public void Delete<T>(int id) where T: class, ISupportIdentity
         {
-            base.Set<T>().Remove(entity);
+            var dbEntity = Find<T>(id);
+            base.Set<T>().Remove(dbEntity);
         }
 
         public T Find<T>(int id) where T: class, ISupportIdentity
@@ -49,8 +51,10 @@ namespace JotBotNg2Core.Data
 
         public T Modify<T>(T entity) where T: class, ISupportIdentity
         {
-            var audit = ApplyAuditTrail(entity);
-            return base.Set<T>().Update(audit).Entity;
+            var dbEntity = Find<T>(entity.Id);
+            MapPropertyValues(entity, ref dbEntity);
+            ApplyAuditTrail(ref dbEntity);
+            return base.Set<T>().Update(dbEntity).Entity;
         }     
 
         public int Save()
@@ -59,7 +63,7 @@ namespace JotBotNg2Core.Data
         }   
 #endregion
 
-        private T ApplyAuditTrail<T>(T entity) where T: class
+        private void ApplyAuditTrail<T>(ref T entity) where T: class
         {
             if (entity is IAuditable)
             {
@@ -76,8 +80,15 @@ namespace JotBotNg2Core.Data
                 }
                 entity = audit as T;
             }
+        }
 
-            return entity;
+        private void MapPropertyValues<TSource, TTarget>(TSource source, ref TTarget target) {
+            var properties = source.GetType().GetProperties();
+            foreach(PropertyInfo pi in properties.Where(p => p.Name != "Id"))
+            {
+                var propVal = pi.GetValue(source, null);
+                target.GetType().GetProperty(pi.Name).SetValue(target, propVal, null);
+            }
         }
 
         public override void Dispose()

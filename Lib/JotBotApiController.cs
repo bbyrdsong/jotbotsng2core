@@ -106,7 +106,7 @@ namespace JotBotNg2Core.Lib
 
         protected virtual void DeleteModel(T model)
         {
-            Context.Delete(model);
+            Context.Delete<T>(model.Id);
             Context.Save();
         }
 #endregion
