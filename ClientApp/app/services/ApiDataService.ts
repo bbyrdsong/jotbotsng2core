@@ -56,7 +56,7 @@ export class ApiDataService {
 
     private extractData(res: Response) {
         let body = res.json();
-        return body.data || {};
+        return body.data || body;
     }
     private handleError(error: Response | any) {
         // In a real world app, we might use a remote logging infrastructure
