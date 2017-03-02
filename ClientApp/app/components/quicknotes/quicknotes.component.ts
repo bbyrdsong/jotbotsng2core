@@ -35,20 +35,25 @@ export class QuickNotesComponent implements OnInit {
             event.preventDefault();
         }
 
-        if (this.model.id) {
-            this.api.put(this.model)
+        if (this.model.id && this.model.id > 0) {
+            this.api.put(this.model, this.model.id)
                 .subscribe(
-                    data => this.model = data,
-                    err => console.log(err)
+                data => {
+                    this.model = data;
+                    this.get();
+                },
+                err => console.log(err)
                 );
         } else {
             this.api.post(this.model)
                 .subscribe(
-                    data => this.model = data,
-                    err => console.log(err)
+                data => {
+                    this.model = data,
+                    this.get();
+                },
+                err => console.log(err)
                 );
         }
-
         this.showForm = false;
     }
 
@@ -65,11 +70,14 @@ export class QuickNotesComponent implements OnInit {
         this.showForm = true;
     }
 
-    delete(model: any, event: Event): void {
+    remove(id: number, event: Event): void {
         if (event) {
             event.preventDefault();
         }
 
-        this.api.remove(model);
+        this.api.remove(id)
+            .subscribe(() => {
+                this.get();
+            });
     }
 }

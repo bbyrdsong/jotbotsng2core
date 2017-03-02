@@ -43,7 +43,7 @@
     <section class="row">
         <div class="quicknote-card" *ngFor="let note of (dbSet | sortObjArrBy: 'name' | filter: filter)">
             <a href="#" (click)="edit(note, $event)">edit</a>
-            <a href="#" class="pull-right" (click)="delete(note, $event)">x</a>
+            <a href="#" class="pull-right" (click)="remove(note.id, $event)">x</a>
             <h4>{{note.name}}</h4>
             <div class="body scrollable">{{note.description}}</div>
         </div>

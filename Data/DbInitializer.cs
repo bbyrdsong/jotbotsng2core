@@ -60,7 +60,7 @@ namespace JotBotNg2Core.Data
                 var modQn = context.Find<QuickNote>(1);
                 Log($"Description before modification: {modQn.Description}");
                 modQn.Description = "Quick Note 1 with spaces!";
-                var dbModQn = context.Modify(modQn);
+                var dbModQn = context.Modify(modQn, modQn.Id);
                 context.SaveChanges();
                 Log($"Description before modification: {dbModQn.Description}");
                 Log($"Modified date: {dbModQn.ModifiedDate}");

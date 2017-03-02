@@ -35,19 +35,23 @@ export class ApiDataService {
     }
 
     post(obj: any): Observable<any> {
-        return this.http.post(`${this.url()}`, JSON.stringify(obj), this.options)
+        // console.log('obj:post', obj);
+        return this.http.post(`${this.url()}`, obj, this.options)
             .map(this.extractData)
             .catch(this.handleError);
     }
 
-    put(obj: any): Observable<any> {
-        return this.http.put(`${this.url()}`, JSON.stringify(obj), this.options)
+    put(obj: any, id: number): Observable<any> {
+        // console.log('obj:put', obj);
+        return this.http.put(`${this.url()}/${id}`, obj, this.options)
             .map(this.extractData)
             .catch(this.handleError);
     }
 
     remove(id: number): Observable<any> {
         return this.http.delete(`${this.url()}/${id}`, this.options)
+            .map(this.extractData)
+            .catch(this.handleError);
     }
 
     private url(): string {

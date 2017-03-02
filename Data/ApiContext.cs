@@ -41,7 +41,8 @@ namespace JotBotNg2Core.Data
 
         public T Find<T>(int id) where T: class, ISupportIdentity
         {
-            return base.Set<T>().FirstOrDefault(o => o.Id == id);
+            var result = base.Set<T>().FirstOrDefault(o => o.Id == id);
+            return result;
         }
 
         public IQueryable<T> GetAll<T>() where T: class, ISupportIdentity
@@ -49,9 +50,9 @@ namespace JotBotNg2Core.Data
             return base.Set<T>();
         }
 
-        public T Modify<T>(T entity) where T: class, ISupportIdentity
+        public T Modify<T>(T entity, int id) where T: class, ISupportIdentity
         {
-            var dbEntity = Find<T>(entity.Id);
+            var dbEntity = Find<T>(id);
             MapPropertyValues(entity, ref dbEntity);
             ApplyAuditTrail(ref dbEntity);
             return base.Set<T>().Update(dbEntity).Entity;
@@ -84,7 +85,7 @@ namespace JotBotNg2Core.Data
 
         private void MapPropertyValues<TSource, TTarget>(TSource source, ref TTarget target) {
             var properties = source.GetType().GetProperties();
-            foreach(PropertyInfo pi in properties.Where(p => p.Name != "Id"))
+            foreach(PropertyInfo pi in properties.Where(p => p.Name != "Id" && p.Name != "Meta"))
             {
                 var propVal = pi.GetValue(source, null);
                 target.GetType().GetProperty(pi.Name).SetValue(target, propVal, null);
