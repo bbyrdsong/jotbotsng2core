@@ -16,6 +16,7 @@ namespace JotBotNg2Core.Data
         public DbSet<Document> Documents { get; set; }
         public DbSet<QuickNote> QuickNotes { get; set; }
         public DbSet<WorkTask> WorkTasks { get; set; }
+        public DbSet<CodeArticle> CodeArticles { get; set; }
 #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -24,6 +25,7 @@ namespace JotBotNg2Core.Data
             modelBuilder.Entity<Document>().ToTable("Document");
             modelBuilder.Entity<QuickNote>().ToTable("QuickNote");
             modelBuilder.Entity<WorkTask>().ToTable("WorkTask");
+            modelBuilder.Entity<CodeArticle>().ToTable("CodeArticle");
         }
 
 #region IDataContext implementation

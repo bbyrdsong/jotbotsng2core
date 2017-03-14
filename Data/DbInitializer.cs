@@ -104,6 +104,17 @@ namespace JotBotNg2Core.Data
                     Description = "An updated POC to dotnet core with angular 2 versus just html."
                 };
                 context.Insert(workTask);
+
+                var codeArticle = new CodeArticle
+                {
+                    Name = "Welcome to Code Articles",
+                    Description = "<h2>Welcome to Code Articles</h2><p>This section will be used to show code examples of reusable code.  "
+                        + "Examples will be written using code blocks as such:<br><pre><code>function getSomething() { return 'something'; }</code></pre><br>"
+                        + "So join me on this journey to collecting as many code examples as possible!</p>",
+                    Tags = "javascript"
+                };
+                context.Insert(codeArticle);
+
                 context.SaveChanges();
                 Log("Data seeded!");
             }
