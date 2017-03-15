@@ -1,0 +1,21 @@
+<h1>Code Conundrum</h1>
+<div class="container">
+    <div class="col-md-3">
+        <ul>
+            <li *ngFor="let item of items">
+                {{item.name}}
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-9">
+        <!--<div>
+            <form class="form" [formGroup]="articleForm">
+                <div class="form-group">
+                    <label for="name" class="control-label">Title</label>
+                    <input type="text" class="form-control" id="name" formControlName="name" />
+                </div>
+            </form>
+        </div>-->
+        {{ article.description }}
+    </div>
+</div>

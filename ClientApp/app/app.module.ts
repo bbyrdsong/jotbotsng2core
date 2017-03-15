@@ -1,3 +1,4 @@
+import { CodeArticlesComponent } from './components/codearticles/code-articles.component';
 import { FilterPipe } from './pipes/filter.pipe';
 import { SortObjArrByPipe } from './pipes/sort-object-array-by.pipe';
 import { ApiDataService } from './services/ApiDataService';
@@ -21,6 +22,7 @@ import { CounterComponent } from './components/counter/counter.component';
         FetchDataComponent,
         HomeComponent,
         QuickNotesComponent,
+        CodeArticlesComponent,
         SortObjArrByPipe,
         FilterPipe
     ],
@@ -32,6 +34,7 @@ import { CounterComponent } from './components/counter/counter.component';
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
             { path: 'quick-notes', component: QuickNotesComponent },
+            { path: 'code-articles', component: CodeArticlesComponent },
             { path: '**', redirectTo: 'home' }
         ]),
         FormsModule
