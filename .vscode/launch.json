@@ -5,7 +5,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceRoot}\\bin\\Debug\\netcoreapp1.1\\jotbotsng2core.dll",
+            "program": "${workspaceRoot}\\bin\\Debug\\netcoreapp1.1\\JotBotNg2Core.dll",
             "args": [],
             "cwd": "${workspaceRoot}",
             "stopAtEntry": false,

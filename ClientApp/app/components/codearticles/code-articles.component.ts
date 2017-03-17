@@ -17,7 +17,10 @@ export class CodeArticlesComponent implements OnInit {
 
     ngOnInit() {
         this.api.getAll().subscribe(
-            resp => { this.items = resp; this.article = resp[0]; },
+            resp => { 
+                this.items = resp.items; 
+                document.getElementById('article').innerHTML = this.items[0].description; 
+            },
             err => console.log(err)
         );
     }

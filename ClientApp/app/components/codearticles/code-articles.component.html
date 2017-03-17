@@ -1,7 +1,7 @@
 <h1>Code Conundrum</h1>
 <div class="container">
     <div class="col-md-3">
-        <ul>
+        <ul *ngIf="items">
             <li *ngFor="let item of items">
                 {{item.name}}
             </li>
@@ -16,6 +16,6 @@
                 </div>
             </form>
         </div>-->
-        {{ article.description }}
+        <div id="article"></div>
     </div>
 </div>
