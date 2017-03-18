@@ -6,7 +6,7 @@ import { QuickNotesComponent } from './components/quicknotes/quicknotes.componen
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { UniversalModule } from 'angular2-universal';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './components/app/app.component'
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
@@ -37,7 +37,7 @@ import { CounterComponent } from './components/counter/counter.component';
             { path: 'code-articles', component: CodeArticlesComponent },
             { path: '**', redirectTo: 'home' }
         ]),
-        FormsModule
+        ReactiveFormsModule
     ],
     providers: [ApiDataService],
 })
