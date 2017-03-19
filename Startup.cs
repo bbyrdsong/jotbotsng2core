@@ -30,7 +30,7 @@ namespace JotBotNg2Core
             services.AddMvc();
 
             services.AddDbContext<ApiDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("WorkConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("HomeConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
